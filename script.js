@@ -8,6 +8,15 @@ let tbodyElem = document.querySelector("table tbody");
 let data = [];
 let findedUser;
 let id = 0;
+let localData = localStorage.getItem("res")
+let localId = localStorage.getItem("userId")
+if(localData){
+    data = JSON.parse(localData)
+    theUser(data)
+ }
+if(localId) {
+    id = Number(localId)
+}
 adduserElem.addEventListener("click",(event) => {
     event.preventDefault()
     data.push({
@@ -18,14 +27,19 @@ adduserElem.addEventListener("click",(event) => {
     })
     theUser(data)
     clear()
+    localStorage.setItem("res",JSON.stringify(data))
+    localStorage.setItem("userId",JSON.stringify(id))
+
 }) 
 function deleteuser(param){
     data = data.filter(user => user.userid !== param )
    theUser(data)
+   localStorage.setItem("res",JSON.stringify(data))
+   localStorage.setItem("userId",JSON.stringify(id))
 }
-function theUser(){
+function theUser(param){
     tbodyElem.innerHTML= ""
-    data.forEach(user=>{
+    param.forEach(user=>{
         let id = 0
         tbodyElem.innerHTML += `
         <tr>
@@ -57,6 +71,8 @@ editElem.addEventListener("click",(event)=>{
     findedUser.userpassword =  userpasswordElem.value, 
     theUser(data)
     clear()
+    localStorage.setItem("res",JSON.stringify(data))
+    localStorage.setItem("userId",JSON.stringify(id))
 })
 
 searchElem.addEventListener("keyup",(event)=>{
