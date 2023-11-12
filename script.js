@@ -14,28 +14,33 @@ if(localData){
     data = JSON.parse(localData)
     theUser(data)
  }
-if(localId) {
-    id = Number(localId)
-}
+// if(localId) {
+//     id = Number(localId)
+// }
 adduserElem.addEventListener("click",(event) => {
     event.preventDefault()
+    
+if (usernameElem.value==""||useremailElem.value==""||userpasswordElem.value=="") {
+    alert("Please Fix ")
+}
+else{
     data.push({
         userid: ++id,
         username:  usernameElem.value, 
         useremail:  useremailElem.value, 
         userpassword:  userpasswordElem.value, 
-    })
+    })}
     theUser(data)
     clear()
-    localStorage.setItem("res",JSON.stringify(data))
-    localStorage.setItem("userId",JSON.stringify(id))
+    // localStorage.setItem("res",JSON.stringify(data))
+    // localStorage.setItem("userId",JSON.stringify(id))
 
 }) 
 function deleteuser(param){
     data = data.filter(user => user.userid !== param )
    theUser(data)
-   localStorage.setItem("res",JSON.stringify(data))
-   localStorage.setItem("userId",JSON.stringify(id))
+//    localStorage.setItem("res",JSON.stringify(data))
+//    localStorage.setItem("userId",JSON.stringify(id))
 }
 function theUser(param){
     tbodyElem.innerHTML= ""
@@ -71,8 +76,8 @@ editElem.addEventListener("click",(event)=>{
     findedUser.userpassword =  userpasswordElem.value, 
     theUser(data)
     clear()
-    localStorage.setItem("res",JSON.stringify(data))
-    localStorage.setItem("userId",JSON.stringify(id))
+    // localStorage.setItem("res",JSON.stringify(data))
+    // localStorage.setItem("userId",JSON.stringify(id))
 })
 
 searchElem.addEventListener("keyup",(event)=>{
